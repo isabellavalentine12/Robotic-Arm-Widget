@@ -102,6 +102,14 @@ class MainScreen(Screen):
 
     def toggleMagnet(self):
         print("Process magnet here")
+        if self.magnetControl.text == "Hold Ball":
+            sleep(0.5)
+            cyprus.set_servo_position(2, 0)  # port 5 (0.5 not magnetized)
+            self.magnetControl.text = "Drop Ball"
+        else:
+            sleep(0.5)
+            cyprus.set_servo_position(2, 0.5)  # port 5 (0 magnet on)
+            self.magnetControl.text = "Hold Ball"
         
     def auto(self):
         print("Run the arm automatically here")
@@ -120,6 +128,7 @@ class MainScreen(Screen):
         
     def initialize(self):
         print("Home arm and turn off magnet")
+        cyprus.set_servo_position(2, 0.5)  # port 5
 
     def resetColors(self):
         self.ids.armControl.color = YELLOW
