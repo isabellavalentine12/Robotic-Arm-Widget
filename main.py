@@ -99,6 +99,13 @@ class MainScreen(Screen):
 
     def toggleArm(self):
         print("Process arm movement here")
+        if self.armControl.text == "Lower Arm":
+            cyprus.set_pwm_values(1, period_value=100000, compare_value=0, compare_mode=cyprus.LESS_THAN_OR_EQUAL)
+            self.armControl.text = "Raise Arm"
+        else:
+            cyprus.set_pwm_values(1, period_value=100000, compare_value=100000, compare_mode=cyprus.LESS_THAN_OR_EQUAL)
+            self.armControl.text = "Lower Arm"
+
 
     def toggleMagnet(self):
         print("Process magnet here")
